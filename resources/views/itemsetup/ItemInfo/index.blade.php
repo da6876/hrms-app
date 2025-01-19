@@ -1,5 +1,4 @@
-
-@section('title',"Major Category")
+@section('title',"Item Master")
 @extends('layout.app')
 @section('main')
     <div class="content-wrapper">
@@ -8,7 +7,7 @@
                 <div class="card">
                     <div class="card-body border-bottom">
                         <div class="d-flex justify-content-between align-items-center flex-wrap">
-                            <h6 class="mb-2 mb-md-0 text-uppercase fw-medium">Item Setup > Major Category</h6>
+                            <h6 class="mb-2 mb-md-0 text-uppercase fw-medium">Item Setup > Item Master</h6>
                             <button class="btn btn-success btn-sm " type="button" onclick="showModal()"><i
                                     class="typcn typcn-plus"></i> Add New
                             </button>
@@ -41,9 +40,12 @@
                             <table id="usersTable" class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Mjr Code</th>
-                                    <th>Mjr Desc</th>
+                                    <th>Item Code</th>
+                                    <th>Short Desc</th>
+                                    <th>Item Desc</th>
+                                    <th>Item Part No</th>
+                                    <th>Origin</th>
+                                    <th>Auxiliary Item</th>
                                     <th>Status</th>
                                     <th>Create Date</th>
                                     <th>Action</th>
@@ -117,7 +119,7 @@
     <script>
         function showModal() {
             $("#addModal form")[0].reset();
-            $(".modal-title").text("Add Major Category");
+            $(".modal-title").text("Add Item Master");
             $("#addModal").modal("show");
             $('#id').val('');
         }
@@ -127,7 +129,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route('mjrCat.data') }}',
+                    url: '{{ route('itemMst.data') }}',
                     type: 'POST',
                     data: function (d) {
                         d._token = $('input[name="_token"]').val(); // Include CSRF token
@@ -136,9 +138,12 @@
                     }
                 },
                 columns: [
-                    {data: 'id'},
-                    {data: 'mjr_code'},
-                    {data: 'mjr_desc'},
+                    {data: 'item_code'},
+                    {data: 'item_short_desc'},
+                    {data: 'item_desc'},
+                    {data: 'item_part_no'},
+                    {data: 'origin'},
+                    {data: 'auxiliary_item'},
                     {data: 'status'},
                     {data: 'create_date'},
                     {
@@ -192,7 +197,7 @@
                         var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
                         $.ajax({
-                            url: "{{ url('mjrCat') }}" + '/' + id,
+                            url: "{{ url('itemMst') }}" + '/' + id,
                             type: "POST",
                             data: {'_method': 'DELETE', '_token': csrf_token},
                             success: function(response) {
@@ -224,7 +229,7 @@
         });
 
         function addData() {
-            url = "{{ url('mjrCat') }}";
+            url = "{{ url('itemMst') }}";
             $.ajax({
                 url: url,
                 type: "POST",
@@ -266,7 +271,7 @@
             $("#pass").hide();
 
             $.ajax({
-                url: "{{ url('mjrCat') }}" + '/' + id,
+                url: "{{ url('itemMst') }}" + '/' + id,
                 type: "GET",
                 dataType: "JSON",
                 success: function (data) {

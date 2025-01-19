@@ -35,4 +35,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('measureUnit', \App\Http\Controllers\ItemSetup\MeasureUnitController::class);
     Route::post('/MeasureUnit/data', [\App\Http\Controllers\ItemSetup\MeasureUnitController::class, 'getdata'])->name('measureUnit.data');
 
+    Route::resource('itemMst', \App\Http\Controllers\ItemSetup\ItemMstController::class);
+    Route::post('/ItemMst/data', [\App\Http\Controllers\ItemSetup\ItemMstController::class, 'getdata'])->name('itemMst.data');
+
+    Route::resource('itemAttribute', \App\Http\Controllers\ItemSetup\ItemAttributeController::class);
+    Route::get('getAttribute', [\App\Http\Controllers\ItemSetup\ItemAttributeController::class, 'getAttribute'])->name('getAttribute');
+    Route::post('/ItemAttribute/data', [\App\Http\Controllers\ItemSetup\ItemAttributeController::class, 'getdata'])->name('itemAttribute.data');
+
+    Route::resource('itemAttributeValue', \App\Http\Controllers\ItemSetup\ItemAttributeValueController::class);
+    Route::post('/ItemAttributeValue/data', [\App\Http\Controllers\ItemSetup\ItemAttributeValueController::class, 'getdata'])->name('itemAttributeValue.data');
+
+    Route::resource('itemInfo', \App\Http\Controllers\ItemSetup\ItemInfoController::class);
+    Route::post('/ItemInfo/data', [\App\Http\Controllers\ItemSetup\ItemInfoController::class, 'getdata'])->name('itemInfo.data');
+
 });

@@ -1,5 +1,4 @@
-
-@section('title',"Major Category")
+@section('title',"Item Attribute Value")
 @extends('layout.app')
 @section('main')
     <div class="content-wrapper">
@@ -8,7 +7,7 @@
                 <div class="card">
                     <div class="card-body border-bottom">
                         <div class="d-flex justify-content-between align-items-center flex-wrap">
-                            <h6 class="mb-2 mb-md-0 text-uppercase fw-medium">Item Setup > Major Category</h6>
+                            <h6 class="mb-2 mb-md-0 text-uppercase fw-medium">Item Setup > Item Attribute Value</h6>
                             <button class="btn btn-success btn-sm " type="button" onclick="showModal()"><i
                                     class="typcn typcn-plus"></i> Add New
                             </button>
@@ -21,18 +20,25 @@
                                 <form id="filterForm">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-3 ml-1">
+                                            <div class="form-group">
+                                                <select class="form-select" name="SelectAttribute" id="SelectAttribute">
+                                                    <option  value="">Select Attribute</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <input type="text" id="name" name="name"
                                                        class="form-control form-control-sm"
-                                                       placeholder="Enter Mjr Code For Search" aria-label="Username">
+                                                       placeholder="Enter Attribute For Search" aria-label="Username">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <input type="text" id="email" name="email"
                                                        class="form-control form-control-sm"
-                                                       placeholder="Enter Mjr Desc For Search" aria-label="Username">
+                                                       placeholder="Enter Attribute Value For Search" aria-label="Username">
                                             </div>
                                         </div>
                                     </div>
@@ -42,8 +48,8 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Mjr Code</th>
-                                    <th>Mjr Desc</th>
+                                    <th>Attribute</th>
+                                    <th>Attribute Value</th>
                                     <th>Status</th>
                                     <th>Create Date</th>
                                     <th>Action</th>
@@ -76,20 +82,20 @@
                         <input type="hidden" name="id" id="id"/>
                         <div class="row g-1">
                             <div class="col mb-1">
-                                <label class="form-label" for="mjr_code">Code</label>
-                                <input type="text" id="mjr_code" name="mjr_code" class="form-control" placeholder="Enter Code" tabindex="-1"/>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="row g-1">
-                            <div class="col mb-1">
-                                <label class="form-label" for="mjr_desc">Desc</label>
-                                <input type="text" id="mjr_desc" name="mjr_desc" class="form-control" placeholder="Enter Desc"/>
+                                <label class="form-label" for="name">Attribute Value Name</label>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Enter Code" tabindex="-1"/>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
-                        <div class="row g-1">
+                        <div class="row g-2">
+                            <div class="col mb-1">
+                                <label class="form-label">Select Attribute</label>
+                                <select class="form-select" name="attribute_id" id="attribute_id">
+                                    <option  value="">Select Attribute</option>
+                                </select>
+                                <div class="invalid-feedback"></div>
+                            </div>
                             <div class="col mb-1">
                                 <label class="form-label">Select Status</label>
                                 <select class="form-select" name="status" id="status">
@@ -115,11 +121,13 @@
 @section('script')
 
     <script>
+        getMajor('Search');
         function showModal() {
             $("#addModal form")[0].reset();
-            $(".modal-title").text("Add Major Category");
+            $(".modal-title").text("Add Item Attribute Value");
             $("#addModal").modal("show");
             $('#id').val('');
+            getMajor('');
         }
 
         $(document).ready(function () {
@@ -127,18 +135,19 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route('mjrCat.data') }}',
+                    url: '{{ route('itemAttributeValue.data') }}',
                     type: 'POST',
                     data: function (d) {
                         d._token = $('input[name="_token"]').val(); // Include CSRF token
+                        d.SelectAttribute = $('#SelectAttribute').val();
                         d.name = $('input[name="name"]').val();
                         d.email = $('input[name="email"]').val();
                     }
                 },
                 columns: [
                     {data: 'id'},
-                    {data: 'mjr_code'},
-                    {data: 'mjr_desc'},
+                    {data: 'attribute'},
+                    {data: 'name'},
                     {data: 'status'},
                     {data: 'create_date'},
                     {
@@ -192,7 +201,7 @@
                         var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
                         $.ajax({
-                            url: "{{ url('mjrCat') }}" + '/' + id,
+                            url: "{{ url('itemAttributeValue') }}" + '/' + id,
                             type: "POST",
                             data: {'_method': 'DELETE', '_token': csrf_token},
                             success: function(response) {
@@ -220,11 +229,14 @@
             $('#name, #email').on('change keyup', function () {
                 table.draw(); // Reload DataTable with new filters
             });
+            $('#SelectAttribute').on('change', function () {
+                table.draw(); // Reload DataTable with new filters
+            });
 
         });
 
         function addData() {
-            url = "{{ url('mjrCat') }}";
+            url = "{{ url('itemAttributeValue') }}";
             $.ajax({
                 url: url,
                 type: "POST",
@@ -266,7 +278,7 @@
             $("#pass").hide();
 
             $.ajax({
-                url: "{{ url('mjrCat') }}" + '/' + id,
+                url: "{{ url('itemAttributeValue') }}" + '/' + id,
                 type: "GET",
                 dataType: "JSON",
                 success: function (data) {
@@ -274,8 +286,8 @@
                     $('.modal-title').text('Update User');
                     $('#addModal').modal('show');
                     $('#id').val(data.id);
-                    $('#mjr_code').val(data.mjr_code);
-                    $('#mjr_desc').val(data.mjr_desc);
+                    $('#name').val(data.name);
+                    getMajor('',data.attribute_id);
                     $('#status').val(data.status);
                 }, error: function () {
                     swal({
@@ -289,5 +301,41 @@
             return false;
         };
 
+        function getMajor(type,id=null) {
+            var csrf_tokens = document.querySelector('meta[name="csrf-token"]').content;
+            var surl = "{{ url('getAttribute') }}";
+            $.ajax({
+                url: surl,
+                type: 'GET',
+                data: {'ViewType': '', "_token": csrf_tokens},
+                datatype: 'JSON',
+                success: function (category) {
+                    console.log("Data Get Successfully");
+                    if (category != '') {
+                        var markup = "<option value=''>Select Attribute</option>";
+                        for (var x = 0; x < category.length; x++) {
+                            markup += "<option value=" + category[x].id + ">" + category[x].id + '- ' + category[x].name + "</option>";
+                        }
+                        if (type=='Search'){
+                            $("#SelectAttribute").html(markup).show();
+                        }else{
+                            $("#attribute_id").html(markup).show();
+                        }
+                        $('#SelectAttribute').val(id);
+                    } else {
+                        if (type=='Search'){
+                            var markup = "<option value=''>Select Major</option>";
+                            $("#SelectAttribute").html(markup).show();
+                        }else{
+                            var markup = "<option value=''>Select Major</option>";
+                            $("#attribute_id").html(markup).show();
+                        }
+                    }
+
+
+                }
+
+            });
+        };
     </script>
 @endsection

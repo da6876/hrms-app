@@ -1,5 +1,5 @@
 
-@section('title',"Major Category")
+@section('title',"Item Attribute")
 @extends('layout.app')
 @section('main')
     <div class="content-wrapper">
@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-body border-bottom">
                         <div class="d-flex justify-content-between align-items-center flex-wrap">
-                            <h6 class="mb-2 mb-md-0 text-uppercase fw-medium">Item Setup > Major Category</h6>
+                            <h6 class="mb-2 mb-md-0 text-uppercase fw-medium">Item Setup > Item Attribute</h6>
                             <button class="btn btn-success btn-sm " type="button" onclick="showModal()"><i
                                     class="typcn typcn-plus"></i> Add New
                             </button>
@@ -25,14 +25,7 @@
                                             <div class="form-group">
                                                 <input type="text" id="name" name="name"
                                                        class="form-control form-control-sm"
-                                                       placeholder="Enter Mjr Code For Search" aria-label="Username">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <input type="text" id="email" name="email"
-                                                       class="form-control form-control-sm"
-                                                       placeholder="Enter Mjr Desc For Search" aria-label="Username">
+                                                       placeholder="Enter Attribute Name For Search" aria-label="Username">
                                             </div>
                                         </div>
                                     </div>
@@ -42,8 +35,7 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Mjr Code</th>
-                                    <th>Mjr Desc</th>
+                                    <th>Name</th>
                                     <th>Status</th>
                                     <th>Create Date</th>
                                     <th>Action</th>
@@ -76,15 +68,8 @@
                         <input type="hidden" name="id" id="id"/>
                         <div class="row g-1">
                             <div class="col mb-1">
-                                <label class="form-label" for="mjr_code">Code</label>
-                                <input type="text" id="mjr_code" name="mjr_code" class="form-control" placeholder="Enter Code" tabindex="-1"/>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="row g-1">
-                            <div class="col mb-1">
-                                <label class="form-label" for="mjr_desc">Desc</label>
-                                <input type="text" id="mjr_desc" name="mjr_desc" class="form-control" placeholder="Enter Desc"/>
+                                <label class="form-label" for="name">Attribute Name</label>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Enter Attribute Name" tabindex="-1"/>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -117,7 +102,7 @@
     <script>
         function showModal() {
             $("#addModal form")[0].reset();
-            $(".modal-title").text("Add Major Category");
+            $(".modal-title").text("Add Item Attribute");
             $("#addModal").modal("show");
             $('#id').val('');
         }
@@ -127,18 +112,16 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route('mjrCat.data') }}',
+                    url: '{{ route('itemAttribute.data') }}',
                     type: 'POST',
                     data: function (d) {
                         d._token = $('input[name="_token"]').val(); // Include CSRF token
                         d.name = $('input[name="name"]').val();
-                        d.email = $('input[name="email"]').val();
                     }
                 },
                 columns: [
                     {data: 'id'},
-                    {data: 'mjr_code'},
-                    {data: 'mjr_desc'},
+                    {data: 'name'},
                     {data: 'status'},
                     {data: 'create_date'},
                     {
@@ -192,7 +175,7 @@
                         var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
                         $.ajax({
-                            url: "{{ url('mjrCat') }}" + '/' + id,
+                            url: "{{ url('itemAttribute') }}" + '/' + id,
                             type: "POST",
                             data: {'_method': 'DELETE', '_token': csrf_token},
                             success: function(response) {
@@ -217,14 +200,14 @@
 
             });
 
-            $('#name, #email').on('change keyup', function () {
-                table.draw(); // Reload DataTable with new filters
+            $('#name').on('change keyup', function () {
+                table.draw();
             });
 
         });
 
         function addData() {
-            url = "{{ url('mjrCat') }}";
+            url = "{{ url('itemAttribute') }}";
             $.ajax({
                 url: url,
                 type: "POST",
@@ -266,7 +249,7 @@
             $("#pass").hide();
 
             $.ajax({
-                url: "{{ url('mjrCat') }}" + '/' + id,
+                url: "{{ url('itemAttribute') }}" + '/' + id,
                 type: "GET",
                 dataType: "JSON",
                 success: function (data) {
@@ -274,8 +257,7 @@
                     $('.modal-title').text('Update User');
                     $('#addModal').modal('show');
                     $('#id').val(data.id);
-                    $('#mjr_code').val(data.mjr_code);
-                    $('#mjr_desc').val(data.mjr_desc);
+                    $('#name').val(data.name);
                     $('#status').val(data.status);
                 }, error: function () {
                     swal({
