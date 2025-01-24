@@ -10,20 +10,23 @@
     <!-- base:css -->
     <link rel="stylesheet" href="{{asset('assets/vendors/typicons/typicons.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendors/css/vendor.bundle.base.css')}}">
+
+    <link rel="stylesheet" href="{{asset('assets/vendors/select2/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css')}}">
     <!-- endinject -->
     <!-- plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/custom-datatables.css')}}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('assets/css/vertical-layout-light/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/vertical-layout-light/custom-datatables.css')}}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" />
-    <link rel="stylesheet" href="{{asset('assets/css/sweetalert2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/vertical-layout-light/sweetalert2.min.css')}}">
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+    @yield('style')
 </head>
 <body>
 <div class="container-scroller">
@@ -410,12 +413,12 @@
 <!-- plugin js for this page -->
 <script src="{{asset('assets/vendors/typeahead.js/typeahead.bundle.min.js')}}"></script>
 <script src="{{asset('assets/vendors/select2/select2.min.js')}}"></script>
+<script src="{{asset('assets/js/select2.js')}}"></script>
 <script src="{{asset('assets/js/sweetalert2.all.min.js')}}"></script>
 
 <!-- endinject -->
 <!-- Custom js for this page-->
 <script src="{{asset('assets/js/dashboard.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <!-- End custom js for this page-->
 @yield('script')

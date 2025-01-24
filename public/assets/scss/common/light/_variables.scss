@@ -39,24 +39,6 @@ $colors: (
   black:            #000000
 );
 
-$blue:             $blue;
-$indigo:           $indigo;
-$purple:           $purple;
-$pink:             $pink;
-$red:              $red;
-$orange:           $orange;
-$yellow:           $yellow;
-$green:            $green;
-$teal:             $teal;
-$cyan:             $cyan;
-$white:            $white;
-$gray:             #434a54;
-$gray-light:       #aab2bd;
-$gray-lighter:     #e8eff4;
-$gray-lightest:    #e6e9ed;
-$gray-dark:        #0f1531;
-$black:            #000000;
-
 
 $theme-colors: (
   primary:         #844fc1,
@@ -68,15 +50,6 @@ $theme-colors: (
   light:           #f8f9fa,
   dark:            #282f3a
 );
-
-$primary:         #844fc1;
-$secondary:       #6c7293;
-$success:         #21bf06;
-$info:            #3b86d1;
-$warning:         #f39915;
-$danger:          #dc3545;
-$light:           #f8f9fa;
-$dark:            #282f3a;
 
 $theme-gradient-colors: (
   primary:         linear-gradient(to right, #3023ae, #c86dd7),
@@ -177,7 +150,7 @@ $tooltip-border-radius: .375rem;
 
 /////////  FORMS /////////
 
-$input-bg:                $white;
+$input-bg:                color(white);
 $input-border-radius:     2px;
 $input-placeholder-color: #c9c8c8;
 $input-font-size: .875rem;
@@ -197,10 +170,7 @@ $input-padding-y-sm:    .50rem;
 $input-padding-x-sm:    .81rem;
 
 $input-padding-y-lg:    .94rem;
-$input-padding-x-lg:    1.94rem;
-
-$form-select-indicator-color: $dark;
-$form-select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$form-select-indicator-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/></svg>");
+$input-padding-x-lg:    .94rem;
 
 ///////// FORMS /////////
 
@@ -215,13 +185,13 @@ $dropdown-link-hover-bg: #eaeaf1;
 
 //////// TABLES ////////
 $table-color: $body-color;
-$table-accent-bg: transparent;
+$table-accent-bg: $content-bg;
 $table-hover-bg:  #eaeaf1;
 $table-cell-padding: 1.25rem .9375rem;
 $table-border-color: $border-color;
 
 $table-inverse-bg: #2a2b32;
-$table-inverse-color: $white;
+$table-inverse-color: color(white);
 
 //////// TABLES ////////
 
@@ -326,5 +296,3 @@ $fullcalendar-color: #a8b2b9;
 ////////   Toggle Switch  //////////////
 $toggle-switch-bg: #e9ecef;
 ////////   CALENDAR  //////////////
-
-$buy-nowbanner-margin-top:74px;

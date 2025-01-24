@@ -13,20 +13,9 @@ class ItemInfo extends Model
     protected $table = 'item_info';
 
     protected $fillable = [
-        'id',
-        'mjr_id',
-        'mnr_id',
-        'measur_unit_id',
-        'mjr_cat_id',
-        'attribute_ids',
-        'name',
-        'desc',
-        'part_no',
-        'status',
-        'create_by',
-        'create_date',
-        'update_by',
-        'update_date',
+        'id', 'item_code','mjr_id', 'mnr_id', 'measur_unit_id', 'mjr_cat_id',
+        'name', 'desc', 'part_no', 'status',
+        'create_by', 'create_date', 'update_by', 'update_date',
     ];
 
 }

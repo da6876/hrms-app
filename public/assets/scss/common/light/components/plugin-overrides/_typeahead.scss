@@ -16,7 +16,7 @@
 }
 
 .typeahead {
-  background-color: $white;
+  background-color: color(white);
   &:focus {
     border-color: $border-color;
   }
@@ -37,7 +37,7 @@
   width: 100%;
   margin: 12px 0;
   padding: 8px 0;
-  background-color: $white;
+  background-color: color(white);
   border: 1px solid $border-color;
   -webkit-border-radius: 8px;
      -moz-border-radius: 8px;
@@ -52,12 +52,12 @@
   font-size: inherit;
   &:hover {
     cursor: pointer;
-    color: $white;
-    background-color: $primary;
+    color: color(white);
+    background-color: theme-color(primary);
   }
   .tt-cursor {
-    color: $white;
-    background-color: $primary;
+    color: color(white);
+    background-color: theme-color(primary);
   }
   p {
     margin: 0;

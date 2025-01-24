@@ -117,8 +117,8 @@
 
 /*-------------------------------------------------------------------*/
 /* === Import Bootstrap functions and variables === */
-@import "../../../../../node_modules/bootstrap/scss/functions";
-@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
 
 /*-------------------------------------------------------------------*/
 /* === Import template variables === */
@@ -126,12 +126,12 @@
 
 /*-------------------------------------------------------------------*/
 /* === SCSS Compass Functions === */
-@import "../../../../../node_modules/compass-mixins/lib/compass";
-@import "../../../../../node_modules/compass-mixins/lib/animate";
+@import "../../../node_modules/compass-mixins/lib/compass";
+@import "../../../node_modules/compass-mixins/lib/animate";
 
 /*-------------------------------------------------------------------*/
 /* === Boostrap Main SCSS === */
-@import "../../../../../node_modules/bootstrap/scss/bootstrap";
+@import "../../../node_modules/bootstrap/scss/bootstrap";
 
 /*-------------------------------------------------------------------*/
 /* === Template mixins === */
@@ -161,27 +161,38 @@
 
 /*-------------------------------------------------------------------*/
 /* === Components === */
+@import "components/accordions";
 @import "components/badges";
 @import "components/buttons";
+@import "components/breadcrumbs";
 @import "components/cards";
 @import "components/checkbox-radio";
 @import "components/dropdown";
 @import "components/forms";
 @import "components/icons";
+@import "components/loaders/loaders";
 @import "components/lists";
+@import "components/pagination";
+@import "components/popover";
+@import "components/portfolio";
 @import "components/preview";
 @import "components/tables";
-@import "components/todo-list";
 @import "components/toggle-switch";
+
 
 /*-------------------------------------------------------------------*/
 /* === Plugin overrides === */
+@import "components/plugin-overrides/ace";
+@import "components/plugin-overrides/avgrund";
 @import "components/plugin-overrides/codemirror";
-@import "components/plugin-overrides/jquery-file-upload";;
-@import "components/plugin-overrides/owl-carousel";
+@import "components/plugin-overrides/jquery-file-upload";
 @import "components/plugin-overrides/pws-tabs";
+@import "components/plugin-overrides/quill";
 @import "components/plugin-overrides/select2";
+@import "components/plugin-overrides/tags";
+@import "components/plugin-overrides/tinymce";
 @import "components/plugin-overrides/typeahead";
+@import "components/plugin-overrides/x-editable";
 
 /*-------------------------------------------------------------------*/
 /* === Landing screens === */

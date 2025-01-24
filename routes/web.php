@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/ItemAttributeValue/data', [\App\Http\Controllers\ItemSetup\ItemAttributeValueController::class, 'getdata'])->name('itemAttributeValue.data');
 
     Route::resource('itemInfo', \App\Http\Controllers\ItemSetup\ItemInfoController::class);
+    Route::get('showItemsDropDown', [\App\Http\Controllers\ItemSetup\ItemInfoController::class, 'showItemsDropDown']);
     Route::post('/ItemInfo/data', [\App\Http\Controllers\ItemSetup\ItemInfoController::class, 'getdata'])->name('itemInfo.data');
 
 });

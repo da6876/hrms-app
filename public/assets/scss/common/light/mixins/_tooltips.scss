@@ -2,27 +2,27 @@
 
 @mixin tooltip-variant($color) {
 	.tooltip-inner {
-		background:  $color;
+		background:  theme-color($color);
 		color: $white;
 	}
 	&.bs-tooltip-top {
     .arrow::before {
-      border-top-color: $color;
+      border-top-color: theme-color($color);
     }
   }
   &.bs-tooltip-right {
     .arrow::before {
-      border-right-color: $color;
+      border-right-color: theme-color($color);
     }
   }
   &.bs-tooltip-bottom {
     .arrow::before {
-      border-bottom-color: $color;
+      border-bottom-color: theme-color($color);
     }
   }
   &.bs-tooltip-left {
     .arrow::before {
-      border-left-color: $color;
+      border-left-color: theme-color($color);
     }
   }
 }

@@ -2,7 +2,7 @@
 
 .select2-container--default {
   .select2-results__option--highlighted[aria-selected] {
-    background: $primary;
+    background: theme-color(primary);
   }
   .select2-selection--single,
   .select2-dropdown,
@@ -32,7 +32,7 @@
   }
   .select2-selection--multiple {
     .select2-selection__choice {
-      color: $white;
+      color: color(white);
       border: 0;
       border-radius: 3px;
       padding: 6px;
@@ -40,26 +40,23 @@
       font-family: inherit;
       line-height: 1;
       .select2-selection__choice__remove {
-        color: $white;
+        color: color(white);
       }
       &:nth-child(5n+1) {
-        background: $primary;
+        background: theme-color(primary);
       }
       &:nth-child(5n+2) {
-        background: $success;
+        background: theme-color(success);
       }
       &:nth-child(5n+3) {
-        background: $info;
+        background: theme-color(info);
       }
       &:nth-child(5n+4) {
-        background: $danger;
+        background: theme-color(danger);
       }
       &:nth-child(5n+5) {
-        background: $warning;
+        background: theme-color(warning);
       }
     }
-  }
-  .select2-selection__arrow {
-    padding-top: 40px;
   }
 }

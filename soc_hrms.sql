@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2025 at 08:21 AM
+-- Generation Time: Jan 24, 2025 at 10:43 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -59,7 +59,34 @@ CREATE TABLE `item_attribute` (
 
 INSERT INTO `item_attribute` (`id`, `name`, `status`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES
 (121000, 'Name', 'A', '2', '2025-01-16 15:23:12', NULL, NULL),
-(121001, 'Type', 'A', '2', '2025-01-16 15:23:23', NULL, NULL);
+(121001, 'Type', 'A', '2', '2025-01-16 15:23:23', NULL, NULL),
+(121002, 'Size', 'A', '2', '2025-01-23 14:40:33', NULL, NULL),
+(121003, 'Display Name', 'A', '2', '2025-01-23 14:41:26', NULL, NULL),
+(121004, 'Part Number', 'A', '2', '2025-01-23 14:41:40', NULL, NULL),
+(121005, 'Capacity', 'A', '2', '2025-01-23 14:42:34', NULL, NULL),
+(121006, 'HS Code', 'A', '2', '2025-01-23 14:43:09', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item_attribute_info`
+--
+
+CREATE TABLE `item_attribute_info` (
+  `id` int(10) NOT NULL,
+  `item_id` int(20) NOT NULL,
+  `attribute_id` varchar(80) NOT NULL,
+  `attribute_value_ids` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `item_attribute_info`
+--
+
+INSERT INTO `item_attribute_info` (`id`, `item_id`, `attribute_id`, `attribute_value_ids`) VALUES
+(7, 123009, '121000', '122001'),
+(8, 123009, '121001', '122004,122006'),
+(9, 123009, '121003', '122005');
 
 -- --------------------------------------------------------
 
@@ -83,7 +110,15 @@ CREATE TABLE `item_attribute_value` (
 --
 
 INSERT INTO `item_attribute_value` (`id`, `attribute_id`, `name`, `status`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES
-(122000, 121000, 'Something Like That', 'A', '2', '2025-01-16 15:28:15', NULL, NULL);
+(122000, 121000, 'Something Like That', 'A', '2', '2025-01-16 15:28:15', NULL, NULL),
+(122001, 121000, 'Battery', 'A', '2', '2025-01-23 15:56:52', NULL, NULL),
+(122002, 121000, 'Meter Wire', 'A', '2', '2025-01-23 15:57:24', NULL, NULL),
+(122003, 121000, 'FLEXIBLE GLASS', 'A', '2', '2025-01-23 15:57:43', NULL, NULL),
+(122004, 121001, 'DRY CELL BATTERY', 'A', '2', '2025-01-23 15:58:07', NULL, NULL),
+(122005, 121003, 'COMPLETE CELLS IN SEAL BATTERY', 'A', '2', '2025-01-23 15:58:34', NULL, NULL),
+(122006, 121001, 'COMPLETE CELLS IN SEAL BATTERY', 'A', '2', '2025-01-23 15:58:55', NULL, NULL),
+(122007, 121004, 'EPR-9', 'A', '2', '2025-01-23 15:59:15', NULL, NULL),
+(122008, 121004, 'YTX4L-BS', 'A', '2', '2025-01-23 15:59:24', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -93,20 +128,27 @@ INSERT INTO `item_attribute_value` (`id`, `attribute_id`, `name`, `status`, `cre
 
 CREATE TABLE `item_info` (
   `id` int(11) NOT NULL,
-  `mjr_id` int(11) NOT NULL,
-  `mnr_id` int(11) NOT NULL,
-  `measur_unit_id` int(11) NOT NULL,
-  `mjr_cat_id` int(11) NOT NULL,
-  `attribute_ids` varchar(20) NOT NULL,
+  `item_code` varchar(50) DEFAULT NULL,
+  `mjr_id` varchar(50) NOT NULL,
+  `mnr_id` varchar(50) NOT NULL,
+  `measur_unit_id` varchar(50) NOT NULL,
+  `mjr_cat_id` varchar(50) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `desc` text DEFAULT NULL,
   `part_no` varchar(150) DEFAULT NULL,
-  `status` varchar(1) DEFAULT 'I',
+  `status` varchar(50) DEFAULT 'I',
   `create_by` varchar(30) DEFAULT NULL,
   `create_date` datetime DEFAULT current_timestamp(),
   `update_by` varchar(30) DEFAULT NULL,
   `update_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `item_info`
+--
+
+INSERT INTO `item_info` (`id`, `item_code`, `mjr_id`, `mnr_id`, `measur_unit_id`, `mjr_cat_id`, `name`, `desc`, `part_no`, `status`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES
+(123009, '01010001008', '01', '0001', '008', '01', 'Batteries', 'Batteries', NULL, 'A', '2', '2025-01-24 15:15:38', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -156,7 +198,8 @@ INSERT INTO `menus` (`id`, `title`, `url`, `icon`, `parent_id`, `order`, `create
 (24, 'Measure Unit', 'measureUnit', '', 20, 4, '2024-09-09 13:36:17', '2024-09-09 13:36:17'),
 (25, 'Item Master', 'itemMst', '', 20, 5, '2024-09-09 13:36:17', '2024-09-09 13:36:17'),
 (26, 'Item Attribute', 'itemAttribute', '', 20, 6, '2024-09-09 13:36:17', '2024-09-09 13:36:17'),
-(27, 'Item Attribute Values', 'itemAttributeValue', '', 20, 7, '2024-09-09 13:36:17', '2024-09-09 13:36:17');
+(27, 'Item Attribute Values', 'itemAttributeValue', '', 20, 7, '2024-09-09 13:36:17', '2024-09-09 13:36:17'),
+(28, 'Item Info', 'itemInfo', '', 20, 8, '2024-09-09 13:36:17', '2024-09-09 13:36:17');
 
 -- --------------------------------------------------------
 
@@ -247,61 +290,61 @@ INSERT INTO `st_auxiliary_item_type` (`id`, `aux_type`, `aux_type_descr`, `statu
 
 CREATE TABLE `st_item_mst` (
   `id` int(11) NOT NULL,
-  `item_code` varchar(40) NOT NULL,
-  `item_desc` longtext DEFAULT NULL,
-  `msr_unit_code` varchar(3) NOT NULL,
-  `item_part_no` varchar(4000) DEFAULT NULL,
-  `item_hs_code` varchar(200) DEFAULT NULL,
-  `item_reorder_qty` varchar(20) DEFAULT NULL,
+  `item_code` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `item_desc` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `msr_unit_code` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `item_part_no` varchar(4000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `item_hs_code` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `item_reorder_qty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `item_avg_lead_time` decimal(5,2) DEFAULT NULL,
   `item_req_qty` decimal(13,2) DEFAULT NULL,
   `item_max_qty` decimal(13,2) DEFAULT NULL,
   `item_min_qty` decimal(13,2) DEFAULT NULL,
   `item_eco_qty` decimal(13,2) DEFAULT NULL,
   `item_tolr_qty` decimal(13,2) DEFAULT NULL,
-  `mjr_code` varchar(5) NOT NULL,
-  `mjr_sub_code` varchar(5) NOT NULL,
-  `mnr_sub_code` varchar(5) DEFAULT NULL,
-  `origin` char(1) DEFAULT NULL,
-  `item_status` char(1) DEFAULT NULL,
+  `mjr_code` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `mjr_sub_code` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `mnr_sub_code` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `origin` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `item_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `item_wa_reorder_qty` decimal(13,2) DEFAULT NULL,
   `item_po_reorder_qty` decimal(13,2) DEFAULT NULL,
-  `sl_no` varchar(4) DEFAULT NULL,
-  `country_code` varchar(3) DEFAULT NULL,
-  `item_basic_category` char(1) DEFAULT NULL,
-  `item_base_store` varchar(4) DEFAULT NULL,
-  `item_base_sub_section` varchar(4) DEFAULT NULL,
-  `item_basic_sub_category` char(1) DEFAULT NULL,
-  `account_card_no` varchar(25) DEFAULT NULL,
-  `mnr_code` varchar(5) DEFAULT NULL,
-  `main_item_msr_code` varchar(3) DEFAULT NULL,
+  `sl_no` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `country_code` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `item_basic_category` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `item_base_store` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `item_base_sub_section` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `item_basic_sub_category` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `account_card_no` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `mnr_code` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `main_item_msr_code` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `contain_qty` decimal(10,0) DEFAULT NULL,
-  `auxiliary_item` char(1) DEFAULT 'm',
-  `item_size` varchar(4000) DEFAULT NULL,
-  `item_capacity` varchar(4000) DEFAULT NULL,
-  `item_sub_name` varchar(100) DEFAULT NULL,
-  `volume_info` varchar(200) DEFAULT NULL,
-  `s_item_code` varchar(40) DEFAULT NULL,
+  `auxiliary_item` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'm',
+  `item_size` varchar(4000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `item_capacity` varchar(4000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `item_sub_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `volume_info` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `s_item_code` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `mak_qty` decimal(10,0) DEFAULT NULL,
   `mak_phy_bal_qty` decimal(10,0) DEFAULT NULL,
-  `id_no` varchar(20) DEFAULT NULL,
+  `id_no` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `shortage_excess` decimal(10,0) DEFAULT NULL,
-  `box_or_ledger` varchar(20) DEFAULT NULL,
-  `bbc_no` varchar(10) DEFAULT NULL,
-  `it_remarks` varchar(500) DEFAULT NULL,
-  `data_error` char(1) DEFAULT 'n',
+  `box_or_ledger` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `bbc_no` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `it_remarks` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `data_error` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'n',
   `unit_3_4_qty` decimal(10,0) DEFAULT NULL,
   `unit_5_qty` decimal(10,0) DEFAULT NULL,
-  `item_pic_name` varchar(600) DEFAULT NULL,
-  `consignee` varchar(100) DEFAULT NULL,
-  `status` char(1) DEFAULT 'n',
-  `create_by` varchar(30) DEFAULT current_user(),
+  `item_pic_name` varchar(600) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `consignee` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'n',
+  `create_by` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT current_user(),
   `create_date` datetime DEFAULT current_timestamp(),
-  `update_by` varchar(30) DEFAULT NULL,
+  `update_by` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
-  `item_short_desc` text DEFAULT NULL,
-  `item_old_code` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `item_short_desc` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `item_old_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
 -- Dumping data for table `st_item_mst`
@@ -7116,7 +7159,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `uid`, `name`, `user_name`, `email`, `phone`, `email_verified_at`, `password`, `longitude`, `latitude`, `ip`, `mac`, `last_login`, `create_by`, `create_date`, `update_date`, `update_by`, `token`) VALUES
 (1, 'admin001', 'Admin User', 'adminuser', 'admin@example.com', '0131010101', '2024-09-09 13:36:16', '$2y$10$AMNfVPayn6xpOl4zsrXvZ.05prCJu4JqBgMNRhrty/.SeQlWfJm4u', '0.000000', '0.000000', '127.0.0.1', '00:00:00:00:00:00', '2024-09-09 19:36:16', 'system', '2024-09-09 19:36:16', '2024-09-09 19:36:16', 'system', 'iR7xjCyBW5nMJhQbRIcLI1aON9tSaUkiiielk5ViEpOLCN6BGvBWW1PcsNo2'),
-(2, 'superadmin001', 'Super Admin', 'superadmin', 'superadmin@example.com', '0101010101', '2024-09-09 13:36:16', '$2y$10$zSIQI3DyuXFEnbQFWL4TbOPnhkyGnD36s1wjMgGhxhm8VqxhxAd2G', '90.4137825', '23.7426155', '163.53.150.94', '00:00:00:00:00:01', '2025-01-16 06:24:12', 'system', '2024-09-09 19:36:16', '2a0vYM1TS7K2RZNfznKv79giIL3eK4MSgxf1NCJu', '2', '2a0vYM1TS7K2RZNfznKv79giIL3eK4MSgxf1NCJu');
+(2, 'superadmin001', 'Super Admin', 'superadmin', 'superadmin@example.com', '0101010101', '2024-09-09 13:36:16', '$2y$10$zSIQI3DyuXFEnbQFWL4TbOPnhkyGnD36s1wjMgGhxhm8VqxhxAd2G', '90.4137921', '23.7426298', '163.53.150.94', '00:00:00:00:00:01', '2025-01-24 08:23:56', 'system', '2024-09-09 19:36:16', 'c2QF5sTdliLcy5y1azJHEvH8diUm71Gp3bjsxYCf', '2', 'c2QF5sTdliLcy5y1azJHEvH8diUm71Gp3bjsxYCf');
 
 --
 -- Indexes for dumped tables
@@ -7133,6 +7176,12 @@ ALTER TABLE `failed_jobs`
 -- Indexes for table `item_attribute`
 --
 ALTER TABLE `item_attribute`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `item_attribute_info`
+--
+ALTER TABLE `item_attribute_info`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -7234,25 +7283,31 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `item_attribute`
 --
 ALTER TABLE `item_attribute`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121002;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121007;
+
+--
+-- AUTO_INCREMENT for table `item_attribute_info`
+--
+ALTER TABLE `item_attribute_info`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `item_attribute_value`
 --
 ALTER TABLE `item_attribute_value`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122001;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122009;
 
 --
 -- AUTO_INCREMENT for table `item_info`
 --
 ALTER TABLE `item_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123000;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123010;
 
 --
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `migrations`

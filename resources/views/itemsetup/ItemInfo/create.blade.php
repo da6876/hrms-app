@@ -76,7 +76,12 @@
                     <form id="addRoleForm" class="row g-3" onsubmit="return false">
                         @csrf
                         <input type="hidden" name="id" id="id"/>
-                        <div class="row g-1">
+                        <div class="row g-2">
+                            <div class="col mb-1">
+                                <label class="form-label" for="mjr_code">Code</label>
+                                <input type="text" id="mjr_code" name="mjr_code" class="form-control" placeholder="Enter Code" tabindex="-1"/>
+                                <div class="invalid-feedback"></div>
+                            </div>
                             <div class="col mb-1">
                                 <label class="form-label" for="mjr_code">Code</label>
                                 <input type="text" id="mjr_code" name="mjr_code" class="form-control" placeholder="Enter Code" tabindex="-1"/>
@@ -87,6 +92,27 @@
                             <div class="col mb-1">
                                 <label class="form-label" for="mjr_desc">Desc</label>
                                 <input type="text" id="mjr_desc" name="mjr_desc" class="form-control" placeholder="Enter Desc"/>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+
+                        <div class="row g-2">
+                            <div class="col mb-1">
+                                <label class="form-label">Select Status</label>
+                                <select class="form-select" name="status" id="status">
+                                    <option  value="">Select Status</option>
+                                    <option value="A" selected>Active</option>
+                                    <option value="I">InActive</option>
+                                </select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="col mb-1">
+                                <label class="form-label">Select Status</label>
+                                <select class="form-select" name="status" id="status">
+                                    <option  value="">Select Status</option>
+                                    <option value="A" selected>Active</option>
+                                    <option value="I">InActive</option>
+                                </select>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -229,6 +255,7 @@
         });
 
         function addData() {
+
             url = "{{ url('itemMst') }}";
             $.ajax({
                 url: url,

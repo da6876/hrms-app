@@ -13,59 +13,26 @@
     border-color: $border-color;
     padding: $input-padding-y .75rem;
     color: $input-placeholder-color;
-    height: 100%;
-  }
-  .btn {
-    height: 100%;
   }
 }
-.form-control,
-.form-select {
+.form-control {
   border: 1px solid $border-color;
   font-weight: 400;
-  // font-size: $input-font-size;
+  font-size: $input-font-size;
 }
 
 select {
   &.form-control {
-    padding: 1rem .75rem;
-    border: 0;
-    outline: 1px solid $border-color;
-    color: $input-placeholder-color;
-    appearance: none;
-    background: url("../../images/arrow-down.svg");
-    background-repeat: no-repeat;
-    background-position: 99% center;
-
-    &:focus {
-      outline: 1px solid $border-color;
-    }
-
-    @each $color, $value in $theme-colors {
-      &.border-#{$color} {
-        outline: 1px solid $value;
-
-        &:focus {
-          outline: 1px solid $value;
-        }
-      }
-    }
-  }
-
-  &.form-select {
     padding: .4375rem .75rem;
     border: 0;
     outline: 1px solid $border-color;
-    color: $input-placeholder-color;    
-
+    color: $input-placeholder-color;
     &:focus {
       outline: 1px solid $border-color;
     }
-
     @each $color, $value in $theme-colors {
       &.border-#{$color} {
         outline: 1px solid $value;
-
         &:focus {
           outline: 1px solid $value;
         }
@@ -81,9 +48,8 @@ select {
     margin-bottom: .5rem;
   }
   &.has-danger {
-    .form-control,
-    .form-select {
-      border-color: $danger;
+    .form-control {
+      border-color: theme-color(danger);
     }
   }
   .file-upload-default {

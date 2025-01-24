@@ -22,7 +22,6 @@
 		background: $white;
 		select {
 			color: $input-placeholder-color;
-			border: 1px solid $border-color;
 		}
 		.input-group {
 			.form-control {
@@ -32,41 +31,19 @@
 				}
 			}
 		}
-		.form-select {
-			background-color: transparent;
-			border: 1px;
-			border-radius: 0;
-			font-size: .9375rem;
-			border-color: $secondary;
-			padding: 15.04px 31.04px;
-		}
-
 	}
 	.auth-form-transparent {
 		background: transparent;
 		.form-control,
-		.form-select,
 		.input-group-text {
-			border-color: $secondary;
+			border-color: theme-color(secondary);
 			&:focus,
 			&:active {
-				border-color: $secondary;
+				border-color: theme-color(secondary);
 			}
 		}
-		.input-group-text {
-			padding: 1.5rem 0.75rem;
-		}
 		select {
-			outline-color: $secondary;
-			border: 1px solid $border-color;
-		}
-		.form-select {
-			background-color: transparent;
-			border: 1px;
-			border-radius: 0;
-			font-size: .9375rem;
-			border-color: $secondary;
-			padding: 15.04px 31.04px;
+			outline-color: theme-color(secondary);
 		}
 	}
 	&.auth-img-bg {
@@ -91,6 +68,7 @@
 				font-size: .8125rem;
 			}
 			.form-control {
+				background: transparent;
 				border-radius: 0;
 				font-size: .9375rem;
 			}
